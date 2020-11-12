@@ -25,8 +25,8 @@ console.log(this.state);
         return (
             <div className="login">
                 <h1 className="login-h1">Hi welcome to the login page enter the following:</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <label>
+                <form className="input"onSubmit={this.handleSubmit}>
+                    <label >
                     Email:
                         <input 
                         onChange={(e) => this.setState({ email: e.target.value })}
@@ -41,7 +41,7 @@ console.log(this.state);
                     {
                         this.state.loading
                         ? 'all your todo is one place'
-                        : <button> LOG IN </button>
+                        : <button className="login-h2"> LOG IN </button>
                     }
                 </form>
             </div>
