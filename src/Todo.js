@@ -56,7 +56,7 @@ export default class todos extends Component {
     render() {
         const {
             todosName,
-            done,
+          
             loading,
             todos,
         } = this.state;
@@ -72,10 +72,10 @@ export default class todos extends Component {
                             onChange={(e) => this.setState({ todosName: e.target.value })}
                         />
                     </label>
-                    <label>
+                    <label >
                         done:
                         <input
-                            value={done}
+                            // defaultValue={this.state.todo.done}
                             onChange={(e) => this.setState({ done: e.target.value })}
                         />
                     </label>
