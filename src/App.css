@@ -36,3 +36,9 @@
   color: #61dafb;
   border: 12px ridge #61dafb;
 }
+.todo{
+  border: 42px ridge #61dafb;
+  margin: 2px;
+  padding: 60px;
+  background-color: black;
+}
