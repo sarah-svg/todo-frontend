@@ -52,7 +52,9 @@ export default class todos extends Component {
 
         await this.fetchtodos();
     }
-
+    handleDoneChange = (e) => {
+        this.setState({ cool: e.target.value });
+    }
     render() {
         const {
             todosName,
@@ -62,7 +64,7 @@ export default class todos extends Component {
         } = this.state;
 
         return (
-            <div>
+            <div className="todo">
                 Welcome to todos!
                 <form onSubmit={this.handleSubmit}>
                     <label>
@@ -73,11 +75,16 @@ export default class todos extends Component {
                         />
                     </label>
                     <label >
-                        done:
+                        {/* done:
                         <input
                             // defaultValue={this.state.todo.done}
                             onChange={(e) => this.setState({ done: e.target.value })}
-                        />
+                        /> */}
+	                            <select onChange={(e) => this.setState({ done: e.target.value })} >
+
+                                <option value="true" style={{textDecoration: this.setState ? 'line-through' : 'none'}}>true</option>
+                                <option value="false">false</option>
+                                </select>
                     </label>
                     <button>
                         Add todo
@@ -92,10 +99,10 @@ export default class todos extends Component {
                         }>
                             name: {todo.name}
                             {
-                                todo.done ? '' : <button
+                                todo.done ? '' : <button className="hidden"
                             
                                     onClick={() => this.handleTodoClick(todo.id)}>
-                                    done
+                                    
                             </button>
                             }
                         </div>)
