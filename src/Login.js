@@ -23,8 +23,8 @@ console.log(this.state);
     }
     render() {
         return (
-            <div>
-                <h1>log in</h1>
+            <div className="login">
+                <h1 className="login-h1">Hi welcome to the login page enter the following:</h1>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                     Email:

@@ -10,7 +10,7 @@ import Login from './Login.js';
 import Home from './Home.js'
 import Todos from './Todo.js';
 import PrivateRoute from './PrivateRoute.js';
-
+import './App.css';
 export default class App extends Component {
   state = {
     username: localStorage.getItem('USERNAME') || '',
@@ -38,7 +38,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="App">
         <Router>
           <ul>
             {
