@@ -22,7 +22,7 @@ export default class Signup extends Component {
         
         this.props.changeTokenAndUsername(user.body.email, user.body.token);
 
-        this.props.history.push('/plants');
+        this.props.history.push('/todo');
     }
 
     render() {
