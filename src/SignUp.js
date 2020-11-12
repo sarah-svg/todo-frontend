@@ -27,10 +27,10 @@ export default class Signup extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Sign up</h2>
+            <div className="login">
+                <h2 className="login-h2"> Sign up</h2>
                 <form onSubmit={this.handleSubmit}>
-                    <label>
+                    <label >
                         Email:
                         <input 
                         onChange={(e) => this.setState({ email: e.target.value })}
