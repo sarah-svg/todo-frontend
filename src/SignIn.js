@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import request from 'superagent';
 import { Link } from 'react-router-dom';
 
-export default class SignUp extends Component {
+export default class SignIn extends Component {
 
     state = {
         email: '',
@@ -13,7 +13,7 @@ export default class SignUp extends Component {
         e.preventDefault();
         console.log(this.state);
         const user = await request
-            .post('https://salty-island-45456.herokuapp.com/auth/signup')
+            .post('https://salty-island-45456.herokuapp.com/auth/signin')
             .send(this.state); 
         this.props.updateEmailAndToken(user.body.email, user.body.token)
         this.props.history.push('/todo');
@@ -21,27 +21,26 @@ export default class SignUp extends Component {
 
     render() {
         return (
-            <div className= 'login'>
-                <label>Sign up to create an account:</label>
-                <form onSubmit = {this.handleSubmit}>
+            <div className="login">
+                <label>Sign in with an existing account:</label>
+                <form className='login' onSubmit = {this.handleSubmit}>
                     <div>
-                        <label id='email-label'>Email:</label>
+                        <label >Email:</label>
                         <input type='text' onChange={(e) => this.setState({ email: e.target.value })}></input>
                     </div>
-                    <div className = 'row small-margin'>
+                    <div>
                         <label id='password-label'>Password:</label>
                         <input type='password' onChange={(e) => this.setState({ password: e.target.value })}></input>
                     </div>
-                    <button>Sign Up</button>
+                    <button>Sign In</button>
                 </form>
                 <div>
-                    <label>Already have an account?</label>
-                    <Link to="./signin">
-                        <button>Sign In</button>
+                    <label>Don't have an account?</label>
+                    <Link to="./signup">
+                        <button>Sign Up</button>
                     </Link>
-
+                    
                 </div>
-
             </div>
         )
     }
