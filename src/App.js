@@ -1,73 +1,64 @@
 import React, { Component } from 'react'
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-} from "react-router-dom";
-import SignUp from './SignUp.js';
-import Login from './Login.js';
-import Home from './Home.js'
-import Todos from './Todo.js';
-import PrivateRoute from './PrivateRoute.js';
 import './App.css';
+import {
+  BrowserRouter as Router, 
+  Route, 
+  Switch,
+} from 'react-router-dom';
+import SignIn from './SignIn.js';
+import SignUp from './SignUp.js';
+import Todos from './Todos.js';
+import PrivateRoute from './PrivateRoute.js';
+
 export default class App extends Component {
+
   state = {
-    username: localStorage.getItem('USERNAME') || '',
-    token: localStorage.getItem('TOKEN') || '',
+    email: localStorage.getItem('EMAIL') || '',
+    token: localStorage.getItem('TOKEN') || ''
   }
 
-  changeTokenAndUsername = (booger1, booger2) => {
-    localStorage.setItem('TOKEN', booger2);
-    localStorage.setItem('USERNAME', booger1);
-
+  updateEmailAndToken = (email, token) => {
     this.setState({
-      username: booger1,
-      token: booger2
+      email: email,
+      token: token
     })
+    localStorage.setItem('EMAIL', email);
+    localStorage.setItem('TOKEN', token);
   }
-  logOut = () => {
-    localStorage.setItem('TOKEN', '');
-    localStorage.setItem('USERNAME', '');
-    /////////setting to state the name and token
+
+  logout = () => {
     this.setState({
-      username: '',
+      email: '',
       token: ''
     })
-
+    localStorage.setItem('EMAIL', '');
+    localStorage.setItem('TOKEN', '');
   }
-  render() {
+  render(){
     return (
       <div className="App">
+        <header className="App-link">
         <Router>
-          <ul>
-            {
-              this.state.token
-                ? <div>
-                  {this.state.username}
-                  <button onClick={this.logOut}></button>
-                </div>
-                : <>
-                  <Link to="/login"><div>log in</div></Link>
-                  <Link to="/signup">sign up</Link>
-                </>}
-          </ul>
-            <Switch>
-              <Route exact path= '/' render={( routerProps) => <Home {...routerProps} /> } />
-              <Route exact path= '/login' render={( routerProps) => <Login
-                {
-                ...routerProps
-                } changeTokenAndUsername={this.changeTokenAndUsername} />} />
-              <Route exact path='/signup' render={( routerProps) => < SignUp 
-                {...routerProps}
-                changeTokenAndUsername={this.changeTokenAndUsername} /> 
-                } />
-                <PrivateRoute token={this.state.token}
-                              exact path='/todo'
-                              render= {(routerProps) => <Todos {...routerProps}
-                            token={this.state.token} />} />  
+              <Switch>
+                <Route 
+                  path="/" 
+                  exact
+                  render={(routerProps) => <SignIn {...routerProps} updateEmailAndToken={this.updateEmailAndToken}/>} 
+                  />
+                <Route 
+                  path="/signup" 
+                  exact
+                  render={(routerProps) => <SignUp {...routerProps} updateEmailAndToken={this.updateEmailAndToken}/>} 
+                  />
+                  <PrivateRoute 
+                  token = {this.state.token}
+                  path="/todo" 
+                  exact
+                  render={(routerProps) => <Todos {...routerProps} email={this.state.email} token={this.state.token} logout={this.logout}/>} 
+                  />
               </Switch>
-        </Router>
+          </Router>
+        </header>
       </div>
     )
   }
